@@ -1,24 +1,28 @@
 import API from '../api'
-// import CartProduct from '../components/CardProduct'
-// import Hero from '../components/Hero'
+import CardProduct from '../components/CardProduct';
 import Carousel from '../components/Carousel'
+import { useLoaderData } from 'react-router-dom';
 
-const HomePage= () => {
+export const loader = async (request) => {
+    const { data } = await API.get('/product')
+    const products = data.data
+    return { products }
+}
+
+const HomePage = () => {
+    const { products } = useLoaderData()
+    console.log(products);
+    
     return (
         <>
             <div>
                 {/* <Hero/> */}
                 <Carousel />
             </div>
-            <div className="border-b border-primary pb-5 mt-5">
-                <h2 className="text-2xl font-bold capitalize">
-                    Daftar Produk
-                </h2>
-            </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 grid-cols-2">
-                {/* {products.map(item => (
-                    <CartProduct item={item} key={item._id} user={user} />
-                ))} */}
+                {products.map(product => (
+                    <CardProduct item={product} key={product.id}/>
+                ))}
             </div>
         </>
     )

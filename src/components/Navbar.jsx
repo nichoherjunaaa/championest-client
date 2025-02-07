@@ -13,9 +13,10 @@ const Navbar = () => {
     return (
         <nav className="bg-base-200">
             <div className="navbar mx-auto max-w-8xl px-5 flex justify-between">
-                <div className="start-logo w-1/5">
-                    <h4>TECHNOFEST 7.0</h4>
+                <div className="start-logo w-56 flex items-center justify-center">
+                    <img src="/logo.png" alt="logo" className="w-full h-full object-contain" />
                 </div>
+
                 <div className="navbar-start pr-28">
                     {/* <div className="hidden lg:flex text-md items-center">
                         <img src={Logo} alt="Logo" className="h-12 w-12" />
@@ -46,11 +47,11 @@ const Navbar = () => {
                 <div className="navbar-end flex md:gap-4">
                     <NavLink to='/cart' className="btn btn-ghost btn-circle btn-md">
                         <div className="indicator">
-                            <BsCart3 className="text-xl"/>
+                            <BsCart3 className="text-xl" />
                             <span className="badge badge-primary badge-xs indicator-item">9</span>
                         </div>
                     </NavLink>
-                    <NavLink className="btn btn-outline btn-primary px-6 text-primary" to='/login'>Login</NavLink>
+                    <NavLink className="btn btn-outline btn-primary px-6 text-primary btn-md" to='/login'>Login</NavLink>
                     <NavLink className="btn btn-primary px-6 text-base-300" to='/login'>Daftar</NavLink>
                     {/* <button className="btn btn-error lg:btn-md btn-md text-xs lg:text-md">Logout</button> */}
                 </div>

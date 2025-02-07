@@ -1,6 +1,10 @@
 import React, { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
+import Loading from './components/Loading';
+
+// loader
+import { loader as homeLoader } from './pages/HomePage';
 
 // Lazy load pages
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -15,10 +19,11 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <HomePage />
+                element: <HomePage />,
+                loader: homeLoader
             },
             {
-                path: 'kompetisi',  
+                path: 'kompetisi',
                 element: <LombaPage />
             },
             {
@@ -35,7 +40,7 @@ const router = createBrowserRouter([
 
 const App = () => {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
             <RouterProvider router={router} />
         </Suspense>
     );
