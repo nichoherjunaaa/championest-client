@@ -18,7 +18,7 @@ const router = createBrowserRouter([
                 element: <HomePage />
             },
             {
-                path: 'event',  // atau 'lomba' jika lebih sesuai
+                path: 'lomba',  // atau 'lomba' jika lebih sesuai
                 element: <LombaPage />
             },
             {

@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import NavList from "./NavList";
-
-const SidebarMenu = () => {
+const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="relative">
+        <nav className="relative">
             {/* Staggered Button */}
             <button
                 className={`fixed top-4 z-50 transition-all duration-300 p-2 bg-primary text-white rounded-full shadow-lg ${isOpen ? "left-56" : "left-4"
@@ -22,7 +21,9 @@ const SidebarMenu = () => {
                     }`}
             >
                 <h2 className="text-lg font-bold mb-4">TECHNOFEST 7.0</h2>
-                <NavList /> 
+                <ul>
+                    <NavList />
+                </ul>
             </div>
 
             {/* Overlay */}
@@ -32,8 +33,8 @@ const SidebarMenu = () => {
                     onClick={() => setIsOpen(false)}
                 ></div>
             )}
-        </div>
+        </nav>
     );
 };
 
-export default SidebarMenu;
+export default Sidebar;

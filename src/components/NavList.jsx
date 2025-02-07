@@ -1,36 +1,36 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { FaHeadset } from "react-icons/fa";
-import { FaHome } from "react-icons/fa";
-import { FaTrophy } from "react-icons/fa";
-import { FaInfoCircle } from "react-icons/fa";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const links = [
-    { id: 1, url: "/", text: "Beranda", icon: <FaHome /> },
-    { id: 2, url: "/event", text: "Daftar Lomba", icon: <FaTrophy /> },
-    { id: 3, url: "/about", text: "Tentang Kami", icon: <FaInfoCircle /> },
-    { id: 4, url: "/customer-service", text: "Customer Service", icon: <FaHeadset /> },
-];
+    { id: 1, url: '', text: "Beranda" },
+    { id: 2, url: 'lomba', text: "Daftar Lomba" },
+    { id: 3, url: 'about', text: "Tentang Kami" },
+    { id: 4, url: 'customer-service', text: "Customer Service" },
 
+]
 const NavList = () => {
+    const user = useSelector(state => state.userState.user)
     return (
-        <ul className="space-y-2">
-            {links.map((link) => (
-                <li key={link.id}>
-                    <NavLink
-                        to={link.url}
-                        className={({ isActive }) =>
-                            `flex items-center gap-4 p-2 rounded ${isActive ? "bg-secondary text-white text-lg" : ""
-                            }`
-                        }
-                    >
-                        {link.icon && link.icon} {/* Menampilkan ikon jika ada */}
-                        {link.text}
-                    </NavLink>
-                </li>
-            ))}
-        </ul>
-    );
-};
+        <>
+            <ul className="flex flex-col gap-2 md:flex-row md:gap-2">
+                {links.map((link) => {
+                    const { id, url, text } = link
+                    if ((url === 'orders' || url === 'checkout') && !user) {
+                        return null
+                    }
+                    return (
+                        <li key={id}>
+                            <NavLink className="capitalize hover:!bg-transparent hover:!text-inherit" to={url}>
+    {text}
+</NavLink>
 
-export default NavList;
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
+    )
+}
+
+export default NavList
