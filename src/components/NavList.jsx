@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 const links = [
     { id: 1, url: '', text: "Beranda" },
-    { id: 2, url: 'lomba', text: "Daftar Lomba" },
+    { id: 2, url: 'kompetisi', text: "Daftar Kompetisi" },
     { id: 3, url: 'about', text: "Tentang Kami" },
     { id: 4, url: 'customer-service', text: "Customer Service" },
 
@@ -22,9 +22,8 @@ const NavList = () => {
                     return (
                         <li key={id}>
                             <NavLink className="capitalize hover:!bg-transparent hover:!text-inherit" to={url}>
-    {text}
-</NavLink>
-
+                                {text}
+                            </NavLink>
                         </li>
                     )
                 })}

@@ -12,7 +12,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-base-200">
-            <div className="navbar mx-auto max-w-8xl px-3 lg:px-8 flex justify-between">
+            <div className="navbar mx-auto max-w-8xl px-5 flex justify-between">
                 <div className="start-logo w-1/5">
                     <h4>TECHNOFEST 7.0</h4>
                 </div>

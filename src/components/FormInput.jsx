@@ -12,7 +12,7 @@ const FormInput = ({ type = "text", name, label, defaultValue, icon, useLabel = 
 
             {/* Input dengan Icon */}
             <div className="relative mt-5">
-                {icon && (``
+                {icon && (
                     <span className="absolute inset-y-0 left-3 flex items-center text-gray-500">
                         {icon}
                     </span>
