@@ -7,10 +7,10 @@ import Loading from './components/Loading';
 import { loader as homeLoader } from './pages/HomePage';
 
 // Lazy load pages
+import InformationPage from './pages/CustomerServicePage';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LombaPage = lazy(() => import('./pages/LombaPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
-const CustomerServicePage = lazy(() => import('./pages/CustomerServicePage'));
 
 const router = createBrowserRouter([
     {
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
                 element: <AboutPage />
             },
             {
-                path: 'customer-service',
-                element: <CustomerServicePage />
+                path: 'news',
+                element: <InformationPage />
             },
         ]
     }

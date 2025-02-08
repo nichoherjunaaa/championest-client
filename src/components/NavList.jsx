@@ -6,7 +6,7 @@ const links = [
     { id: 1, url: '', text: "Beranda" },
     { id: 2, url: 'kompetisi', text: "Daftar Kompetisi" },
     { id: 3, url: 'about', text: "Tentang Kami" },
-    { id: 4, url: 'customer-service', text: "Customer Service" },
+    { id: 4, url: 'news', text: "Informasi" },
 
 ]
 const NavList = () => {
@@ -21,7 +21,12 @@ const NavList = () => {
                     }
                     return (
                         <li key={id}>
-                            <NavLink className="capitalize hover:!bg-transparent hover:!text-inherit" to={url}>
+                            <NavLink className={({ isActive }) =>
+                                `rounded-none capitalize hover: !bg-transparent hover: !text - inherit 
+                            ${isActive ? '!border-primary border-b-4 !text-inherit' : ''} 
+                            hover:bg-transparent hover:text-inherit 
+                            focus:outline-none focus:ring-0 focus:shadow-none`
+                            } to={url}>
                                 {text}
                             </NavLink>
                         </li>
