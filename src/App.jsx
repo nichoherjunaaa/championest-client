@@ -8,6 +8,7 @@ import { loader as homeLoader } from './pages/HomePage';
 
 // Lazy load pages
 import InformationPage from './pages/CustomerServicePage';
+import ErrorPage from './pages/ErrorPage';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LombaPage = lazy(() => import('./pages/LombaPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout />,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 index: true,

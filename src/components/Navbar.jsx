@@ -13,7 +13,7 @@ const Navbar = () => {
     return (
         <nav className="bg-base-200">
             <div className="navbar mx-auto max-w-8xl px-5 flex justify-between">
-                <div className="start-logo w-56 flex items-center justify-center">
+                <div className="start-logo w-56 lg:flex items-center justify-center hidden">
                     <img src="/logo.png" alt="logo" className="w-full h-full object-contain" />
                 </div>
 
@@ -41,10 +41,10 @@ const Navbar = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="w-3/4 ml-8 mb-3">
+                <div className="w-3/4 ml-8 mb-3 hidden lg:flex">
                     <FormInput className="ml-4" icon={<FaSearch />} label="Cari apa saja" type="text" name="search" placeholder="Search" />
                 </div>
-                <div className="navbar-end flex md:gap-4">
+                <div className="navbar-end flex md:gap-4 gap-3">
                     <NavLink to='/cart' className="btn btn-ghost btn-circle btn-md">
                         <div className="indicator">
                             <BsCart3 className="text-xl" />
@@ -52,8 +52,13 @@ const Navbar = () => {
                         </div>
                     </NavLink>
                     <NavLink className="btn btn-outline btn-primary px-6 text-primary btn-md text-md" to='/login'>Login</NavLink>
-                    <NavLink className="btn btn-primary px-6 text-base-300" to='/login'>Daftar</NavLink>
+                    <NavLink className="btn btn-primary px-6 text-base-300 hidden lg:flex" to='/login'>Daftar</NavLink>
                     {/* <button className="btn btn-error lg:btn-md btn-md text-xs lg:text-md">Logout</button> */}
+                </div>
+            </div>
+            <div className="lg:hidden w-full justify-center items-center flex bg-white">
+                <div className="w-5/6">
+                <FormInput className="" icon={<FaSearch />} label="Cari apa saja" type="text" name="search" placeholder="Search" />
                 </div>
             </div>
         </nav >
