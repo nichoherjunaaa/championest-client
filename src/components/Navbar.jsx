@@ -14,7 +14,8 @@ const Navbar = () => {
         <nav className="bg-base-200">
             <div className="navbar mx-auto max-w-8xl px-5 flex justify-between">
                 <div className="start-logo w-56 lg:flex items-center justify-center hidden">
-                    <img src="/logo.png" alt="logo" className="w-full h-full object-contain" />
+                    {/* <img src="/logo.png" alt="logo" className="w-full h-full object-contain" /> */}
+                    <h2>LOGO</h2>
                 </div>
 
                 <div className="navbar-start pr-28">

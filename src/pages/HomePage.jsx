@@ -12,7 +12,7 @@ export const loader = async (request) => {
 const HomePage = () => {
     const { products } = useLoaderData()
     console.log(products);
-    
+
     return (
         <>
             <div>
@@ -20,11 +20,11 @@ const HomePage = () => {
                 <Carousel />
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 grid-cols-1">
-                {products.map(product => (
-                    <CardProduct item={product} key={product.id}/>
+                {products?.map(item => (
+                    <CardProduct item={item} key={item._id}/>
                 ))}
             </div>
-            
+
         </>
     )
 }

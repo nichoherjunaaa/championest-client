@@ -20,7 +20,7 @@ const Sidebar = () => {
                 className={`fixed top-0 left-0 h-full bg-primary text-white w-52 p-4 transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
             >
-                <h2 className="text-lg font-bold mb-4">TECHNOFEST 7.0</h2>
+                <h2 className="text-lg font-bold mb-4">LOGO</h2>
                 <ul>
                     <NavList />
                 </ul>

@@ -5,7 +5,7 @@ import Loading from './components/Loading';
 
 // loader
 import { loader as homeLoader } from './pages/HomePage';
-
+import { loader as lombaLoader } from './pages/LombaPage';
 // Lazy load pages
 import InformationPage from './pages/CustomerServicePage';
 import ErrorPage from './pages/ErrorPage';
@@ -26,7 +26,8 @@ const router = createBrowserRouter([
             },
             {
                 path: 'kompetisi',
-                element: <LombaPage />
+                element: <LombaPage />,
+                loader: lombaLoader
             },
             {
                 path: 'about',
