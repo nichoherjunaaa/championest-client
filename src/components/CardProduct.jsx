@@ -34,7 +34,7 @@ const CardProduct = ({ item, user }) => {
                         : item.deskripsi}
                 </p>
                 <div className="card-actions justify-start mt-3 sm:mt-5 items-center">
-                    <Link to={`/product/detail/${item._id}`} className="btn btn-primary btn-sm sm:btn-sm h-9 lg:btn-lg flex justify-center items-center text-center w-full">
+                    <Link to={`/kompetisi/detail/${item._id}`} className="btn btn-primary btn-sm sm:btn-sm h-9 lg:btn-lg flex justify-center items-center text-center w-full">
                         Detail
                     </Link>
                 </div>

@@ -3,7 +3,7 @@ import React from 'react';
 const InformationPage = () => {
     return (
         <div className="flex flex-col w-full">
-            <div className="bg-primary guide-file justify-center items-center flex w-full h-32">
+            <div className="bg-base-300 guide-file justify-center items-center flex w-full h-32">
                 Guide
             </div>
             <div className="news-info grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 grid-cols-1">

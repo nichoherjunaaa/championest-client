@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import Loading from './components/Loading';
-
+import DetailPage from './pages/DetailPage';
 // loader
 import { loader as homeLoader } from './pages/HomePage';
 import { loader as lombaLoader } from './pages/LombaPage';
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
                 path: 'news',
                 element: <InformationPage />
             },
+            {
+                path: 'kompetisi/detail/:id',
+                element: <DetailPage />
+            }
         ]
     }
 ]);
