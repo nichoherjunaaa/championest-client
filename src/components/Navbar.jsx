@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import API from '../api'
 import FormInput from './FormInput'
 import { FaSearch } from "react-icons/fa";
+import Logo from '../assets/owner/logo033.png'
 
 const Navbar = () => {
 
@@ -15,13 +16,14 @@ const Navbar = () => {
             <div className="navbar mx-auto max-w-8xl px-5 flex justify-between">
                 <div className="start-logo w-56 lg:flex items-center justify-center hidden">
                     {/* <img src="/logo.png" alt="logo" className="w-full h-full object-contain" /> */}
-                    <h2>LOGO</h2>
+                    <img src={Logo} alt="Logo" className="w-28"/>
+                    {/* <h2>LOGO</h2> */}
                 </div>
 
                 <div className="navbar-start pr-28">
-                    {/* <div className="hidden lg:flex text-md items-center">
+                    <div className="hidden lg:flex text-md items-center">
                         <img src={Logo} alt="Logo" className="h-12 w-12" />
-                    </div> */}
+                    </div>
                     <div className="dropdown relative">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
                             <FaBarsStaggered className="h-5 w-5" />
@@ -43,7 +45,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="w-3/4 ml-8 mb-3 hidden lg:flex">
-                    <FormInput className="ml-4" icon={<FaSearch />} label="Cari apa saja" type="text" name="search" placeholder="Search" />
+                    <FormInput className="ml-4" icon={<FaSearch />} label="Cari Kompetisi" type="text" name="search" placeholder="Search" />
                 </div>
                 <div className="navbar-end flex md:gap-4 gap-3">
                     <NavLink to='/cart' className="btn btn-ghost btn-circle btn-md">
