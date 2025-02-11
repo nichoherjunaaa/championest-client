@@ -5,21 +5,29 @@ import Loading from './components/Loading';
 // loader
 import { loader as homeLoader } from './pages/HomePage';
 import { loader as lombaLoader } from './pages/LombaPage';
+
+// action
+import { action as LoginAction } from './pages/LoginPage';
+import { action as RegisterAction } from './pages/RegisterPage';
+
 // Lazy load pages
 import DetailPage from './pages/DetailPage';
 import InformationPage from './pages/CustomerServicePage';
 import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-const HomePage = lazy(() => import('./pages/HomePage'));
-const LombaPage = lazy(() => import('./pages/LombaPage'));
-const AboutPage = lazy(() => import('./pages/AboutPage'));
+import AboutPage from './pages/AboutPage';
+import HomePage from './pages/HomePage';
+import LombaPage from './pages/LombaPage';
+
+
+import { store } from './store';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout />,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -47,19 +55,19 @@ const router = createBrowserRouter([
     },
     {
         path: '/login',
-        element: <LoginPage />
+        element: <LoginPage />,
+        action: LoginAction(store)
     },
     {
         path: '/register',
-        element: <RegisterPage/>
+        element: <RegisterPage />,
+        action: RegisterAction(store)
     }
 ]);
 
 const App = () => {
     return (
-        <Suspense fallback={<Loading />}>
-            <RouterProvider router={router} />
-        </Suspense>
+        <RouterProvider router={router} />
     );
 }
 

@@ -13,7 +13,7 @@ export const loader = async ({ request }) => {
         const products = data.data
         // console.log(products);
         const pagination = data.pagination
-        console.log(pagination); 
+        // console.log(pagination); 
         return { products, pagination, params }
     } catch (error) {
         console.error('api error', error);
