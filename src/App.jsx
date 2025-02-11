@@ -10,6 +10,7 @@ import DetailPage from './pages/DetailPage';
 import InformationPage from './pages/CustomerServicePage';
 import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LombaPage = lazy(() => import('./pages/LombaPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
     {
         path: '/login',
         element: <LoginPage />
+    },
+    {
+        path: '/register',
+        element: <RegisterPage/>
     }
 ]);
 
