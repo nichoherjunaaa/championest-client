@@ -15,7 +15,7 @@ const HomePage = () => {
 
     return (
         <>
-            <div className="flex flex-col gap-7">
+            <div className="body-home flex flex-col gap-7">
                 <div className="text-center py-10 bg-primary text-white">
                     <h1 className="text-4xl font-bold">🔥 Championest 2025 – Tantang Dirimu, Raih Prestasi! 🔥</h1>
                     <p className="text-lg mt-3 max-w-2xl mx-auto">

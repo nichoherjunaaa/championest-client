@@ -29,9 +29,7 @@ const AboutPage = () => {
             {/* Tentang Kami */}
             <div className="flex flex-col gap-2">
                 <h1 className="text-2xl font-bold text-center">Tentang Kami</h1>
-                <p className="text-justify">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore, corporis quam labore,
-                    optio fugiat dignissimos mollitia porro ea molestias molestiae maiores dolores magni nisi.
+                <p className="text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis ratione doloremque magnam laboriosam corporis in, quam distinctio nulla quaerat at recusandae voluptatum blanditiis. Neque repudiandae alias dolor deserunt eaque. Molestiae corporis, voluptatem voluptatibus voluptas earum iusto, fugit ad illo temporibus itaque repellat, mollitia aliquam. Cum maxime culpa officia repudiandae veniam quod ipsa consectetur ullam, quos, odit nulla hic placeat suscipit! Et odit error quod nihil assumenda, repellendus debitis? Fugit numquam reiciendis labore ducimus enim architecto fugiat ullam autem, adipisci magni, deleniti odio quas laborum in, quidem voluptate sequi quod veritatis et ut perspiciatis! Itaque ab tenetur qui sint, vel incidunt.
                 </p>
             </div>
 
