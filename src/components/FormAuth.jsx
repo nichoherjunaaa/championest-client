@@ -12,7 +12,7 @@ const FormAuth = ({ isRegister = false }) => {
                 <p className="text-center">Tantang Dirimu, Raih Prestasi! </p>
                 <Form className="flex flex-col gap-4" action="" method="post">
                     {isRegister && (
-                        <FormInput type='text' label='Username' icon={<FaLock />} />
+                        <FormInput type='text' label='Username' name='username' icon={<FaUser />} />
                     )}
                     <FormInput type='email' label='Email' name='email' icon={<FaUser />} />
                     <FormInput type='password' label='Password' name='password' icon={<FaLock />} />
