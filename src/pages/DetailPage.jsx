@@ -4,11 +4,14 @@ import API from './../api';
 import { useState, useEffect } from 'react';
 import { formatHarga, generateSelectAmount } from '../utils';
 import { FaShoppingCart } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../features/cartSlice';
+
 const DetailPage = () => {
     let { id } = useParams()
     const [product, setProduct] = useState("")
     const [amount, setAmount] = useState(1);
-
+    const dispatch = useDispatch()
     const dataLomba = async () => {
         try {
             // console.log(id);
@@ -18,6 +21,25 @@ const DetailPage = () => {
         } catch (error) {
             console.log('Error getting data', error);
         }
+    }
+
+    const productCart = {
+        cartId : product._id + product.nama,
+        productId : product._id,
+        image : product.gambar,
+        name : product.nama,
+        harga : product.harga,
+        jumlah : product.stok,
+        amount
+    }
+
+    const handleAmount = (e) => {
+        setAmount(parseInt(e.target.value))
+    }
+
+    const cartHandle = () => {
+        // console.log("Keranjang", product, amount);
+        dispatch(addProduct({ product: productCart }))
     }
 
     useEffect(() => {
@@ -57,12 +79,12 @@ const DetailPage = () => {
                                     <select
                                         name="amount"
                                         className="select select-bordered w-full"
-                                    // onChange={handleAmount}
+                                    onChange={handleAmount}
                                     >
                                         {generateSelectAmount(product.stok)}
                                     </select>
                                 </label>
-                                    <button className="btn w-full btn-primary flex items-center justify-center gap-2 text-sm lg:text-base lg:btn-lg">
+                                    <button onClick={cartHandle} className="btn w-full btn-primary flex items-center justify-center gap-2 text-sm lg:text-base lg:btn-lg">
                                         <FaShoppingCart /> Keranjang
                                     </button>
                             </div>

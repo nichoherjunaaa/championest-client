@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 const defaultValue = {
-    cartItems: [],
+    CartItems: [],
     numItemsCart: 0,
     cartTotal: 0,
 }
@@ -17,14 +17,13 @@ const cartSlice = createSlice({
     reducers: {
         addProduct : (state, action) => {
             const { product } = action.payload
-            const item = state.cartItems.find(i => {
-                i.cartId === product.cartId
-            })
+            const item = state.CartItems.find(i => i.cartId === product.cartId);
+
 
             if (item) {
                 item.amount += product.amount
             } else {
-                state.cartItems.push(product)
+                state.CartItems.push(product)
             }
             state.numItemsCart += product.amount
             state.cartTotal += product.price * product.amount
