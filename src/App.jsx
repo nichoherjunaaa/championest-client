@@ -10,7 +10,7 @@ import { loader as lombaLoader } from './pages/LombaPage';
 import { action as LoginAction } from './pages/LoginPage';
 import { action as RegisterAction } from './pages/RegisterPage';
 
-// Lazy load pages
+// pages
 import DetailPage from './pages/DetailPage';
 import InformationPage from './pages/CustomerServicePage';
 import ErrorPage from './pages/ErrorPage';
@@ -19,7 +19,6 @@ import RegisterPage from './pages/RegisterPage';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import LombaPage from './pages/LombaPage';
-
 
 import { store } from './store';
 

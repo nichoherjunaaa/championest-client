@@ -1,7 +1,8 @@
 import React from 'react'
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, Link } from 'react-router-dom';
 import API from './../api';
 import CardProduct from '../components/CardProduct';
+import { useSelector } from 'react-redux';
 
 export const loader = async ({ request }) => {
     const url = new URL(request.url)
@@ -21,22 +22,28 @@ export const loader = async ({ request }) => {
     }
 }
 const LombaPage = () => {
-    const { products, pagination} = useLoaderData()
-    // const user = use
+    const { products, pagination } = useLoaderData()
+    const user = useSelector(state => state.userState.user)
+    console.log(user);
     return (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 grid-cols-1">
-            {
-                !products.length ? (
-                    <div>
-                        <h1>Maaf, yang anda cari tidak ditemukan</h1>
-                    </div>
-                ) : (
-                    products.map(product => (
-                        <CardProduct item = {product} key={product._id}/>
-                    ))
-                )
-            }
-        </div>
+        <>
+            <div className="flex justify-end">
+                <Link className="btn btn-primary btn-md">Tambah Kompetisi</Link>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 grid-cols-1">
+                {
+                    !products.length ? (
+                        <div>
+                            <h1>Maaf, yang anda cari tidak ditemukan</h1>
+                        </div>
+                    ) : (
+                        products.map(product => (
+                            <CardProduct item={product} key={product._id} />
+                        ))
+                    )
+                }
+            </div>
+        </>
     )
 }
 

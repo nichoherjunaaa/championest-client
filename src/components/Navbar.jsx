@@ -8,15 +8,30 @@ import API from '../api'
 import FormInput from './FormInput'
 import { FaSearch } from "react-icons/fa";
 import Logo from '../assets/owner/logo033.png'
+import { logoutUser } from '../features/userSlice'
 
 const Navbar = () => {
+    const user = useSelector(state => state.userState.user)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleLogout = async () => {
+        try {
+            const response = await API.delete('/auth/logout')
+            // console.log(response);
+            dispatch(logoutUser())
+            navigate('/')
+        } catch (error) {
+            dispatch(logoutUser())
+            navigate('/')
+        }
 
+    }
     return (
         <nav className="bg-base-200">
             <div className="navbar mx-auto max-w-8xl px-5 flex justify-between">
                 <div className="start-logo w-56 lg:flex items-center justify-center hidden">
                     {/* <img src="/logo.png" alt="logo" className="w-full h-full object-contain" /> */}
-                    <img src={Logo} alt="Logo" className="w-28"/>
+                    <img src={Logo} alt="Logo" className="w-28" />
                     {/* <h2>LOGO</h2> */}
                 </div>
 
@@ -54,14 +69,19 @@ const Navbar = () => {
                             <span className="badge badge-primary badge-xs indicator-item">9</span>
                         </div>
                     </NavLink>
-                    <NavLink className="btn btn-outline btn-primary px-6 text-primary btn-md text-md" to='/login'>Login</NavLink>
-                    <NavLink className="btn btn-primary px-6 text-base-300 hidden lg:flex" to='/login'>Daftar</NavLink>
-                    {/* <button className="btn btn-error lg:btn-md btn-md text-xs lg:text-md">Logout</button> */}
+                    {!user ? (
+                        <>
+                            <NavLink className="btn btn-outline btn-primary px-6 text-primary btn-md text-md" to='/login'>Login</NavLink>
+                            <NavLink className="btn btn-primary px-6 text-base-300 hidden lg:flex" to='/login'>Daftar</NavLink>
+                        </>
+                    ) : (
+                        <button className="btn btn-error lg:btn-md btn-md text-xs lg:text-md" onClick={handleLogout}>Logout</button>
+                    )}
                 </div>
             </div>
             <div className="lg:hidden w-full justify-center items-center flex bg-white">
                 <div className="w-5/6">
-                <FormInput className="" icon={<FaSearch />} label="Cari apa saja" type="text" name="search" placeholder="Search" />
+                    <FormInput className="" icon={<FaSearch />} label="Cari Kompetisi" type="text" name="search" placeholder="Search" />
                 </div>
             </div>
         </nav >
