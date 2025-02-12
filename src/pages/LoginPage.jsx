@@ -13,7 +13,7 @@ export const action = (store) => async ({ request }) => {
     // console.log(data);
     try {
         const response = await API.post('/auth/login', data);
-        console.log(response);
+        // console.log(response);
         store.dispatch(loginUser(response.data));
         toast.success('Login Berhasil')
         return redirect('/');

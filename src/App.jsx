@@ -12,7 +12,7 @@ import { action as RegisterAction } from './pages/RegisterPage';
 
 // pages
 import DetailPage from './pages/DetailPage';
-import InformationPage from './pages/CustomerServicePage';
+import InformationPage from './pages/InformationPage';
 import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -21,6 +21,8 @@ import HomePage from './pages/HomePage';
 import LombaPage from './pages/LombaPage';
 
 import { store } from './store';
+import TambahPage from './pages/TambahPage';
+import CartPage from './pages/CartPage';
 
 const router = createBrowserRouter([
     {
@@ -39,6 +41,16 @@ const router = createBrowserRouter([
                 loader: lombaLoader
             },
             {
+                path: 'kompetisi/new',
+                element: <TambahPage/>
+            },
+            
+            {
+                path: 'cart',
+                element: <CartPage/>
+            },
+            
+            {
                 path: 'about',
                 element: <AboutPage />
             },
@@ -49,7 +61,7 @@ const router = createBrowserRouter([
             {
                 path: 'kompetisi/detail/:id',
                 element: <DetailPage />
-            }
+            },
         ]
     },
     {

@@ -24,12 +24,16 @@ export const loader = async ({ request }) => {
 const LombaPage = () => {
     const { products, pagination } = useLoaderData()
     const user = useSelector(state => state.userState.user)
-    console.log(user);
+    // console.log(user);
     return (
         <>
-            <div className="flex justify-end">
-                <Link className="btn btn-primary btn-md">Tambah Kompetisi</Link>
-            </div>
+            {
+                user && user.role == 'admin' && (
+                    <div className="flex justify-end">
+                        <Link className="btn btn-primary btn-md" to="/kompetisi/new" >Tambah Kompetisi</Link>
+                    </div>
+                )
+            }
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 grid-cols-1">
                 {
                     !products.length ? (

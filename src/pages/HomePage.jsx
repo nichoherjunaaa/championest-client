@@ -11,7 +11,7 @@ export const loader = async (request) => {
 
 const HomePage = () => {
     const { products } = useLoaderData()
-    console.log(products);
+    // console.log(products);
 
     return (
         <>
