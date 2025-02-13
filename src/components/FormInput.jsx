@@ -1,6 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-const FormInput = ({ type = "text", name, label, defaultValue, icon, useLabel = false }) => {
+const FormInput = ({
+    type = "text",
+    name,
+    label,
+    defaultValue,
+    value,          // tambahkan prop value
+    onChange,       // tambahkan prop onChange
+    icon,
+    useLabel = false,
+    onEnter
+}) => {
     return (
         <div className="form-control w-full">
             {/* Label (Opsional) */}
@@ -18,15 +28,22 @@ const FormInput = ({ type = "text", name, label, defaultValue, icon, useLabel = 
                     </span>
                 )}
                 <input
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            onEnter && onEnter(e.target.value);
+                        }
+                    }}
+                    value={value}             
+                    onChange={onChange}       
                     type={type}
                     name={name}
                     defaultValue={defaultValue}
                     placeholder={label}
-                    className={`input input-bordered text-sm rounded-full w-full pl-10`}
+                    className="input input-bordered text-sm rounded-full w-full pl-10"
                 />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default FormInput
+export default FormInput;

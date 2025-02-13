@@ -1,39 +1,43 @@
-import React from 'react'
-import { useNavigate, NavLink } from 'react-router-dom'
-import NavList from './NavList'
-import { BsCart3 } from 'react-icons/bs'
-import { FaBarsStaggered } from 'react-icons/fa6'
-import { useSelector, useDispatch } from 'react-redux'
-import API from '../api'
-import FormInput from './FormInput'
+import React, { useState } from 'react';
+import { useNavigate, NavLink } from 'react-router-dom';
+import NavList from './NavList';
+import { BsCart3 } from 'react-icons/bs';
+import { FaBarsStaggered } from 'react-icons/fa6';
+import { useSelector, useDispatch } from 'react-redux';
+import API from '../api';
+import FormInput from './FormInput';
 import { FaSearch } from "react-icons/fa";
-import Logo from '../assets/owner/logo033.png'
-import { logoutUser } from '../features/userSlice'
+import Logo from '../assets/owner/logo033.png';
+import { logoutUser } from '../features/userSlice';
 
 const Navbar = () => {
-    const user = useSelector(state => state.userState.user)
-    const countItems = useSelector(state => state.cartState.numItemsCart)
+    const user = useSelector(state => state.userState.user);
+    const countItems = useSelector(state => state.cartState.numItemsCart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState('');
+
     const handleLogout = async () => {
         try {
-            const response = await API.delete('/auth/logout')
-            // console.log(response);
-            dispatch(logoutUser())
-            navigate('/')
+            await API.delete('/auth/logout');
+            dispatch(logoutUser());
+            navigate('/');
         } catch (error) {
-            dispatch(logoutUser())
-            navigate('/')
+            dispatch(logoutUser());
+            navigate('/');
         }
+    };
 
-    }
+    const handleSearch = (e) => {
+        e.preventDefault();
+        navigate(`/kompetisi?nama=${encodeURIComponent(searchTerm)}`);
+    };
+
     return (
         <nav className="bg-base-200">
             <div className="navbar mx-auto max-w-8xl px-5 flex justify-between">
                 <div className="start-logo w-56 lg:flex items-center justify-center hidden">
-                    {/* <img src="/logo.png" alt="logo" className="w-full h-full object-contain" /> */}
                     <img src={Logo} alt="Logo" className="w-28" />
-                    {/* <h2>LOGO</h2> */}
                 </div>
 
                 <div className="navbar-start pr-28">
@@ -52,17 +56,28 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    {/* Dekstop */}
-
                     <div className="hidden lg:flex">
                         <ul className="menu menu-horizontal">
                             <NavList />
                         </ul>
                     </div>
                 </div>
+
                 <div className="w-3/4 ml-8 mb-3 hidden lg:flex">
-                    <FormInput className="ml-4" icon={<FaSearch />} label="Cari Kompetisi" type="text" name="search" placeholder="Search" />
+                    <form onSubmit={handleSearch} className="w-full flex">
+                        <FormInput
+                            className="ml-4"
+                            icon={<FaSearch />}
+                            label="Cari Kompetisi"
+                            type="text"
+                            name="search"
+                            placeholder="Search"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </form>
                 </div>
+
                 <div className="navbar-end flex md:gap-4 gap-3">
                     <NavLink to='/cart' className="btn btn-ghost btn-circle btn-md">
                         <div className="indicator">
@@ -80,13 +95,26 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
+
+            {/* Form pencarian untuk mobile */}
             <div className="lg:hidden w-full justify-center items-center flex bg-white">
                 <div className="w-5/6">
-                    <FormInput className="" icon={<FaSearch />} label="Cari Kompetisi" type="text" name="search" placeholder="Search" />
+                    <form onSubmit={handleSearch} className="w-full">
+                        <FormInput
+                            className=""
+                            icon={<FaSearch />}
+                            label="Cari Kompetisi"
+                            type="text"
+                            name="search"
+                            placeholder="Search"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </form>
                 </div>
             </div>
-        </nav >
-    )
-}
+        </nav>
+    );
+};
 
-export default Navbar
+export default Navbar;
