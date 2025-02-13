@@ -2,6 +2,7 @@ import API from '../api'
 import CardProduct from '../components/CardProduct';
 import Carousel from '../components/Carousel'
 import { useLoaderData, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export const loader = async (request) => {
     const { data } = await API.get('/product')
@@ -12,7 +13,7 @@ export const loader = async (request) => {
 const HomePage = () => {
     const { products } = useLoaderData()
     // console.log(products);
-
+    const user = useSelector(state => state.userState.user)
     return (
         <>
             <div className="body-home flex flex-col gap-7">
@@ -29,7 +30,7 @@ const HomePage = () => {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 grid-cols-1">
                     {products?.map(item => (
-                        <CardProduct item={item} key={item._id} />
+                        <CardProduct item={item} key={item._id} user = {user} />
                     ))}
                 </div>
             </div>

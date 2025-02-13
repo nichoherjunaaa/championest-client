@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 
 const CartPage = () => {
     const user = useSelector(state => state.userState.user)
-    console.log(user);
+    const cart = useSelector(state => state.cartState)
+    console.log(cart);
     return (
         <>
             <div className="border-b border-primary pb-5 mt-5">

@@ -42,7 +42,7 @@ const LombaPage = () => {
                         </div>
                     ) : (
                         products.map(product => (
-                            <CardProduct item={product} key={product._id} />
+                            <CardProduct item={product} key={product._id} user={user} />
                         ))
                     )
                 }

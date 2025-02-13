@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { formatHarga } from '../utils';
-import { Link } from 'react-router-dom';
+import { Link, useRevalidator } from 'react-router-dom';
+import { FaTrash, FaEdit } from "react-icons/fa";
+import Dialog from './Dialog';
+
 const CardProduct = ({ item, user }) => {
+    const [showDialog, setShowDialog] = useState(false);
+    
+    const handleClick = () => {
+        setShowDialog(true); // Menampilkan dialog saat ikon trash diklik
+    };
+
+    const handleClose = () => {
+        setShowDialog(false); // Menutup dialog
+    };
+
     return (
-        
         <div className="card bg-base-300 w-full sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
             <figure>
                 <div className="relative w-full aspect-[3/4]">
@@ -12,20 +24,20 @@ const CardProduct = ({ item, user }) => {
                         alt={item.nama}
                         className="w-full h-full object-cover rounded-t-lg"
                     />
-                    {/* {item.stock < 1 && (
+                    {item.stok < 1 && (
                         <span className="absolute top-0 right-0 bg-error text-xs sm:text-sm lg:text-xl rounded-md font-bold p-2">Sold Out</span>
-                    )} */}
+                    )}
                 </div>
             </figure>
             <div className="card-body p-3 sm:p-5 flex flex-col">
-                {/* {user && user.role === "owner" && (
+                {user && (
                     <div className="flex justify-end gap-x-2 sm:gap-x-3">
-                        <FaTrash onClick={handleDelete} className="text-red-500 cursor-pointer text-sm sm:text-base lg:text-lg" />
-                        <Link to={`/product/${item._id}/edit`}>
-                            <FaPencilAlt className="text-info cursor-pointer text-sm sm:text-base lg:text-lg" />
+                        <FaTrash onClick={handleClick} className="text-red-500 cursor-pointer text-sm sm:text-base lg:text-xl" />
+                        <Link>
+                            <FaEdit className="text-info cursor-pointer text-sm sm:text-base lg:text-xl" />
                         </Link>
                     </div>
-                )} */}
+                )}
                 <h2 className="card-title text-sm sm:text-lg lg:text-2xl font-bold">{item.nama}</h2>
                 <p className="font-bold text-primary text-xs sm:text-sm lg:text-xl">{formatHarga(item.harga)}</p>
                 <p className="text-xs sm:text-sm lg:text-lg hidden lg:block">
@@ -39,6 +51,7 @@ const CardProduct = ({ item, user }) => {
                     </Link>
                 </div>
             </div>
+                {showDialog && <Dialog onClose={handleClose} item={item} />}
         </div>
     );
 };
