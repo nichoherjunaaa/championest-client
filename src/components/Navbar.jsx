@@ -12,6 +12,7 @@ import { logoutUser } from '../features/userSlice'
 
 const Navbar = () => {
     const user = useSelector(state => state.userState.user)
+    const countItems = useSelector(state => state.cartState.numItemsCart)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogout = async () => {
@@ -66,7 +67,7 @@ const Navbar = () => {
                     <NavLink to='/cart' className="btn btn-ghost btn-circle btn-md">
                         <div className="indicator">
                             <BsCart3 className="text-xl" />
-                            <span className="badge badge-primary badge-xs indicator-item">9</span>
+                            <span className="badge badge-primary badge-xs indicator-item">{countItems}</span>
                         </div>
                     </NavLink>
                     {!user ? (

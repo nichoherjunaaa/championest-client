@@ -24,14 +24,17 @@ const DetailPage = () => {
     }
 
     const productCart = {
-        cartId : product._id + product.nama,
-        productId : product._id,
-        image : product.gambar,
-        name : product.nama,
-        harga : product.harga,
-        jumlah : product.stok,
+        cartId: product._id + product.nama,
+        productId: product._id,
+        image: product.gambar,
+        name: product.nama,
+        price: product.harga,
+        stock: product.stok,
         amount
     }
+
+    // console.log(productCart);
+    
 
     const handleAmount = (e) => {
         setAmount(parseInt(e.target.value))

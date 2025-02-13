@@ -15,24 +15,30 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: getCartLocalStorage(),
     reducers: {
-        addProduct : (state, action) => {
-            const { product } = action.payload
+        addProduct: (state, action) => {
+            // console.log(state.cartTotal);
+            
+            const { product } = action.payload;
             const item = state.CartItems.find(i => i.cartId === product.cartId);
 
-
             if (item) {
-                item.amount += product.amount
+                const prevAmount = item.amount;  // Menyimpan jumlah lama produk
+                item.amount += product.amount;  // Menambah jumlah produk
+                state.numItemsCart += product.amount;  // Update jumlah total item
+                state.cartTotal += product.price * (product.amount - prevAmount);  // Update total harga
             } else {
-                state.CartItems.push(product)
+                state.CartItems.push(product);
+                state.numItemsCart += product.amount;
+                state.cartTotal += product.price * product.amount;
             }
-            state.numItemsCart += product.amount
-            state.cartTotal += product.price * product.amount
-            localStorage.setItem('cart', JSON.stringify(state))
-            toast.success('Produk ditambahkan ke keranjang')
-        }
-    }
-})
 
-export const { addProduct } = cartSlice.actions
+            // Simpan ke localStorage setelah update state
+            localStorage.setItem('cart', JSON.stringify(state));
+            toast.success('Produk ditambahkan ke keranjang');
+            console.log(state.cartTotal);
+        },
+    },
+});
 
-export default cartSlice.reducer
+export const { addProduct } = cartSlice.actions;
+export default cartSlice.reducer;
