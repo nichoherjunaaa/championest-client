@@ -37,8 +37,12 @@ const cartSlice = createSlice({
             toast.success('Produk ditambahkan ke keranjang');
             console.log(state.cartTotal);
         },
+        clearCartItems  : (state) => {
+            localStorage.setItem('cart', JSON.stringify(defaultValue));
+            return defaultValue
+        }
     },
 });
 
-export const { addProduct } = cartSlice.actions;
+export const { addProduct, clearCartItems } = cartSlice.actions;
 export default cartSlice.reducer;

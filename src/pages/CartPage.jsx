@@ -28,7 +28,7 @@ const CartPage = () => {
                     {user ? (
                         <Link to='/checkout' className="btn btn-primary btn-block mt-8">Checkout</Link>
                     ) : (
-                        <Link to="/login" className="btn btn-primary btn-block mt-8">Login to Checkout</Link>
+                        <Link to="/login" className="btn btn-primary btn-block mt-8">Login untuk Checkout</Link>
                     )}
                 </div>
             </div>

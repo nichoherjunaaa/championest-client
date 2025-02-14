@@ -33,8 +33,10 @@ const LombaPage = () => {
             )}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 grid-cols-1">
                 {!products.length ? (
-                    <div>
-                        <h1>Maaf, yang anda cari tidak ditemukan untuk pencarian "{params.nama}"</h1>
+                    <div className="flex items-center justify-center h-full text-center col-span-full">
+                        <h1 className="p-4 text-black rounded-lg">
+                            Maaf, yang Anda cari tidak ditemukan untuk pencarian "{params.nama}"
+                        </h1>
                     </div>
                 ) : (
                     products.map(product => (

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, NavLink, useLocation } from 'react-router-dom';
 import NavList from './NavList';
 import { BsCart3 } from 'react-icons/bs';
 import { FaBarsStaggered } from 'react-icons/fa6';
@@ -9,8 +9,10 @@ import FormInput from './FormInput';
 import { FaSearch } from "react-icons/fa";
 import Logo from '../assets/owner/logo033.png';
 import { logoutUser } from '../features/userSlice';
+import { clearCartItems } from '../features/cartSlice';
 
 const Navbar = () => {
+    const location = useLocation();
     const user = useSelector(state => state.userState.user);
     const countItems = useSelector(state => state.cartState.numItemsCart);
     const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const Navbar = () => {
         try {
             await API.delete('/auth/logout');
             dispatch(logoutUser());
+            dispatch(clearCartItems())
             navigate('/');
         } catch (error) {
             dispatch(logoutUser());
@@ -32,6 +35,10 @@ const Navbar = () => {
         e.preventDefault();
         navigate(`/kompetisi?nama=${encodeURIComponent(searchTerm)}`);
     };
+
+    useEffect(() => {
+        setSearchTerm('');
+    }, [location.pathname]);
 
     return (
         <nav className="bg-base-200">
