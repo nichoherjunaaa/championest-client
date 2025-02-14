@@ -36,7 +36,7 @@ const Navbar = () => {
         navigate(`/kompetisi?nama=${encodeURIComponent(searchTerm)}`);
     };
 
-    useEffect(() => {
+    useEffect(() => {``
         setSearchTerm('');
     }, [location.pathname]);
 
