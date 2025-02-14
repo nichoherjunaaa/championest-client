@@ -3,19 +3,21 @@ import { generateSelectAmount, formatHarga } from '../utils';
 import { FaTrash } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 import CartList from './CartListItems';
+import { editCartItems, removeItem } from '../features/cartSlice';
 
 const CartListItems = ({ cartItem }) => {
-    const { cartId, name, price, image, amount, jumlah } = cartItem;
-    // console.log(cartItem);
+    const { cartId, name, price, image, amount, stock } = cartItem;
+    // console.log('cart ',cartItem);
     const dispatch = useDispatch();
 
-    // const handleAmount = (e) => {
-    //     dispatch(editItem({ cartId, amount: parseInt(e.target.value) }));
-    // };
+    const handleAmount = (e) => {
+        dispatch(editCartItems({ cartId, amount: parseInt(e.target.value) }));
+    };
 
-    // const removeProductHandle = () => {
-    //     dispatch(removeItem({ cartId }));
-    // };
+    const removeProductHandle = () => {
+        console.log('clicked');
+        dispatch(removeItem({ cartId }));
+    };
 
     return (
         <article key={cartId} className="mb-12 grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:items-center flex-wrap border-b border-base-300 pb-6 last:border-b-0">
@@ -31,12 +33,13 @@ const CartListItems = ({ cartItem }) => {
                         name="amount"
                         className="select select-bordered w-full"
                         value={amount}
+                        onChange={handleAmount}
                     >
-                        {generateSelectAmount(jumlah)}
+                        {generateSelectAmount(stock)}
                     </select>
                 </div>
                 <button className="mt-2 btn btn-secondary flex items-center justify-center w-full">
-                    <FaTrash className="text-lg" />
+                    <FaTrash className="text-lg" onClick={removeProductHandle} />
                 </button>
             </div>
         </article>

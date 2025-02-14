@@ -17,7 +17,7 @@ const cartSlice = createSlice({
     reducers: {
         addProduct: (state, action) => {
             // console.log(state.cartTotal);
-            
+
             const { product } = action.payload;
             const item = state.CartItems.find(i => i.cartId === product.cartId);
 
@@ -37,12 +37,31 @@ const cartSlice = createSlice({
             toast.success('Produk ditambahkan ke keranjang');
             console.log(state.cartTotal);
         },
-        clearCartItems  : (state) => {
+        clearCartItems: (state) => {
             localStorage.setItem('cart', JSON.stringify(defaultValue));
             return defaultValue
+        },
+        editCartItems: (state, action) => {
+            const { cartId, amount } = action.payload;
+            const itemProduct = state.CartItems.find(i => i.cartId === cartId);
+            state.numItemsCart += amount - itemProduct.amount;
+            state.cartTotal += (amount - itemProduct.amount) * itemProduct.price;
+            itemProduct.amount = amount;
+            localStorage.setItem('cart', JSON.stringify(state));
+            // toast.success('Jumlah produk diubah');
+        },
+        removeItem : (state, action) => {
+            const { cartId } = action.payload;
+            const itemProduct = state.CartItems.find(i => i.cartId === cartId);
+            state.CartItems = state.CartItems.filter(i => i.cartId !== cartId);
+            state.numItemsCart -= itemProduct.amount;
+            state.cartTotal -= itemProduct.price * itemProduct.amount;
+            localStorage.setItem('cart', JSON.stringify(state));
+            toast.success('Produk dihapus dari keranjang');
         }
+
     },
 });
 
-export const { addProduct, clearCartItems } = cartSlice.actions;
+export const { addProduct, clearCartItems, editCartItems, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

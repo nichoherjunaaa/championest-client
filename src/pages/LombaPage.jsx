@@ -3,7 +3,7 @@ import { useLoaderData, Link } from 'react-router-dom';
 import API from './../api';
 import CardProduct from '../components/CardProduct';
 import { useSelector } from 'react-redux';
-
+import NoDataIcon from '../assets/ilustration/nodata.png'
 export const loader = async ({ request }) => {
     const url = new URL(request.url);
     const params = Object.fromEntries(new URLSearchParams(url.search));
@@ -35,6 +35,7 @@ const LombaPage = () => {
                 {!products.length ? (
                     <div className="flex items-center justify-center h-full text-center col-span-full">
                         <h1 className="p-4 text-black rounded-lg">
+                            <img src={NoDataIcon} alt="" className="lg:max-w-md"/>
                             Maaf, yang Anda cari tidak ditemukan untuk pencarian "{params.nama}"
                         </h1>
                     </div>

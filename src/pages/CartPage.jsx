@@ -2,11 +2,22 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import CartList from '../components/CartList';
 import { Link } from 'react-router-dom';
-import {formatHarga } from '../utils'
+import { formatHarga } from '../utils'
+import EmptyIcon from '../assets/ilustration/emptycart.png'
 const CartPage = () => {
     const user = useSelector(state => state.userState.user)
     const cart = useSelector(state => state.cartState)
-    console.log(cart);
+    // console.log(cart);
+    if (cart.numItemsCart === 0) {
+        return (
+            <>
+                <div className="flex items-center justify-center w-full flex-col">
+                    <img src={EmptyIcon} alt="" className="w-56 lg:w-1/3"/>
+                    <h1 className="text-center lg:text-3xl w-full h-full text-md">Keranjang kamu masih kosong nih...</h1>
+                </div>
+            </>
+        )
+    }
     return (
         <>
             <div className="border-b border-primary pb-5 mt-5">

@@ -95,7 +95,7 @@ const Navbar = () => {
                     {!user ? (
                         <>
                             <NavLink className="btn btn-outline btn-primary px-6 text-primary btn-md text-md" to='/login'>Login</NavLink>
-                            <NavLink className="btn btn-primary px-6 text-base-300 hidden lg:flex" to='/login'>Daftar</NavLink>
+                            <NavLink className="btn btn-primary px-6 text-base-300 hidden lg:flex" to='/register'>Daftar</NavLink>
                         </>
                     ) : (
                         <button className="btn btn-error lg:btn-md btn-md text-xs lg:text-md" onClick={handleLogout}>Logout</button>
