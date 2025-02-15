@@ -9,7 +9,7 @@ export const loader = async ({ request }) => {
     const params = Object.fromEntries(new URLSearchParams(url.search));
     params.limit = 8;
     try {
-        console.log(params);
+        // console.log(params);
         const { data } = await API.get('/product', { params });
         const products = data.data;
         const pagination = data.pagination;

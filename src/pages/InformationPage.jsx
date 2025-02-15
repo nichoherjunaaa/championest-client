@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
-import Photo from "../assets/carousel/slide2.webp";
-import Photo2 from "../assets/carousel/adult-baseball-game.jpg";
-import Photo3 from "../assets/carousel/Fan-With-Sign-At-Soccer-Game.jpg";
-import Photo4 from "../assets/carousel/slide1.jpeg";
+import API from "./../api";
 
 const InformationPage = () => {
+    const [dokumentasi, setDokumentasi] = useState([]);
+
+    const getData = async () => {
+        try {
+            const { data } = await API.get("/dokumentasi");
+            setDokumentasi(data.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
+
     return (
         <div className="flex flex-col w-full">
-            {/* Guide Section */}
             <div className="bg-base-300 flex justify-center items-center w-full h-32 text-xl font-bold">
                 Guide
             </div>
 
-            {/* News Section */}
             <div className="news-info grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
                 {[1, 2, 3].map((item) => (
                     <div
@@ -36,17 +46,16 @@ const InformationPage = () => {
                 ))}
             </div>
 
-            {/* Documentation Section */}
             <div className="flex flex-col w-full justify-center items-center mt-10">
                 <h1 className="text-2xl font-bold mb-5">Dokumentasi Championest 2023</h1>
                 <div className="relative w-full overflow-hidden">
-                    <Marquee pauseOnHover={true} speed={50}  className="w-full overflow-hidden">
-                        {[Photo, Photo2, Photo3, Photo4, Photo, Photo2, Photo3, Photo4].map((src, index) => (
+                    <Marquee pauseOnHover={true} speed={50} loop={0} className="w-full overflow-hidden flex">
+                        {[...dokumentasi, ...dokumentasi].map((item, index) => (
                             <img
                                 key={index}
-                                src={src}
+                                src={item.gambar}
                                 alt={`Photo ${index}`}
-                                className="w-64 h-40 object-cover rounded-lg shadow-md mx-2 transition-transform transform hover:scale-110 overflow-hidden"
+                                className="w-64 h-40 object-cover rounded-lg shadow-md mr-2 transition-transform transform hover:scale-110 overflow-hidden"
                             />
                         ))}
                     </Marquee>
