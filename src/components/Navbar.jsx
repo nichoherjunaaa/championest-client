@@ -15,6 +15,7 @@ const Navbar = () => {
     const location = useLocation();
     const user = useSelector(state => state.userState.user);
     const countItems = useSelector(state => state.cartState.numItemsCart);
+    // console.log(countItems);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');

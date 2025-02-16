@@ -5,61 +5,84 @@ const defaultValue = {
     CartItems: [],
     numItemsCart: 0,
     cartTotal: 0,
-}
+};
 
 const getCartLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('cart')) || defaultValue
-}
+    try {
+        const cart = localStorage.getItem('cart');
+        return cart ? JSON.parse(cart) : defaultValue;
+    } catch (error) {
+        console.error('Error parsing localStorage:', error);
+        return defaultValue;
+    }
+};
+
+const saveCartToLocalStorage = (state) => {
+    localStorage.setItem('cart', JSON.stringify(state));
+};
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: getCartLocalStorage(),
     reducers: {
         addProduct: (state, action) => {
-            // console.log(state.cartTotal);
-
             const { product } = action.payload;
             const item = state.CartItems.find(i => i.cartId === product.cartId);
 
+            state.numItemsCart = state.numItemsCart || 0;
+            state.cartTotal = state.cartTotal || 0;
+
             if (item) {
-                const prevAmount = item.amount;  // Menyimpan jumlah lama produk
-                item.amount += product.amount;  // Menambah jumlah produk
-                state.numItemsCart += product.amount;  // Update jumlah total item
-                state.cartTotal += product.price * (product.amount - prevAmount);  // Update total harga
+                const prevAmount = item.amount;
+                item.amount += product.amount;
+                state.numItemsCart += product.amount;
+                state.cartTotal += product.price * (product.amount);
             } else {
                 state.CartItems.push(product);
                 state.numItemsCart += product.amount;
                 state.cartTotal += product.price * product.amount;
             }
 
-            // Simpan ke localStorage setelah update state
-            localStorage.setItem('cart', JSON.stringify(state));
+            saveCartToLocalStorage(state);
             toast.success('Produk ditambahkan ke keranjang');
-            console.log(state.cartTotal);
         },
+
         clearCartItems: (state) => {
-            localStorage.setItem('cart', JSON.stringify(defaultValue));
-            return defaultValue
+            saveCartToLocalStorage(defaultValue);
+            return { ...defaultValue };
         },
+
         editCartItems: (state, action) => {
             const { cartId, amount } = action.payload;
             const itemProduct = state.CartItems.find(i => i.cartId === cartId);
-            state.numItemsCart += amount - itemProduct.amount;
-            state.cartTotal += (amount - itemProduct.amount) * itemProduct.price;
-            itemProduct.amount = amount;
-            localStorage.setItem('cart', JSON.stringify(state));
-            // toast.success('Jumlah produk diubah');
+
+            if (itemProduct) {
+                const amountDifference = amount - itemProduct.amount;
+
+                state.numItemsCart += amountDifference;
+                state.cartTotal += amountDifference * itemProduct.price;
+
+                itemProduct.amount = amount;
+
+                saveCartToLocalStorage(state);
+                toast.success('Jumlah produk diperbarui');
+            }
         },
-        removeItem : (state, action) => {
+
+        removeItem: (state, action) => {
             const { cartId } = action.payload;
             const itemProduct = state.CartItems.find(i => i.cartId === cartId);
-            state.CartItems = state.CartItems.filter(i => i.cartId !== cartId);
-            state.numItemsCart -= itemProduct.amount;
-            state.cartTotal -= itemProduct.price * itemProduct.amount;
-            localStorage.setItem('cart', JSON.stringify(state));
-            toast.success('Produk dihapus dari keranjang');
-        }
 
+            if (itemProduct) {
+                state.numItemsCart = Math.max(0, (state.numItemsCart || 0) - itemProduct.amount);
+                state.cartTotal = Math.max(0, (state.cartTotal || 0) - itemProduct.price * itemProduct.amount);
+
+                state.CartItems = state.CartItems.filter(i => i.cartId !== cartId);
+
+                saveCartToLocalStorage(state);
+                toast.success('Produk dihapus dari keranjang');
+            }
+        },
     },
 });
 

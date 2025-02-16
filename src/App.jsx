@@ -23,6 +23,7 @@ import LombaPage from './pages/LombaPage';
 import { store } from './store';
 import TambahPage from './pages/TambahPage';
 import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 const router = createBrowserRouter([
     {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
                 path: 'kompetisi/detail/:id',
                 element: <DetailPage />
             },
+            {
+                path :  'checkout',
+                element : <CheckoutPage/>
+            }
         ]
     },
     {
