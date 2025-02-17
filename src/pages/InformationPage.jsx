@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import API from "./../api";
+import { toast } from 'react-toastify';
 
 const InformationPage = () => {
     const [dokumentasi, setDokumentasi] = useState([]);
+    const [berita, setBerita] = useState([]);
 
     const getData = async () => {
         try {
@@ -14,8 +16,18 @@ const InformationPage = () => {
         }
     };
 
+    const getBeritaData = async () => {
+        try {
+            const { data } = await API.get("/news");
+            setBerita(data.data);
+        } catch (error) {
+            toast.error("Gagal mendapatkan berita");
+        }
+    }
+
     useEffect(() => {
         getData();
+        getBeritaData();
     }, []);
 
     return (
@@ -25,19 +37,19 @@ const InformationPage = () => {
             </div>
 
             <div className="news-info grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
-                {[1, 2, 3].map((item) => (
+                {berita.map((item) => (
                     <div
                         key={item}
                         className="news-item bg-base-300 p-4 rounded-lg shadow-md hover:shadow-xl transition-all"
                     >
                         <img
-                            src="https://via.placeholder.com/300"
-                            alt={`News Image ${item}`}
+                            src={item.gambar}
+                            alt={`News Image ${item.nama}`}
                             className="w-full h-48 object-cover rounded-md mb-4"
                         />
-                        <h3 className="text-xl font-semibold">Judul Berita {item}</h3>
+                        <h3 className="text-xl font-semibold">{item.nama}</h3>
                         <p className="text-gray-600 mt-2">
-                            Deskripsi singkat dari berita atau informasi terkait. Ini adalah contoh deskripsi yang bisa ditambahkan pada setiap item berita.
+                            {item.deskripsi}
                         </p>
                         <a href="#" className="text-primary mt-4 inline-block">
                             Read more

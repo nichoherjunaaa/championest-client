@@ -14,6 +14,7 @@ const CartPage = () => {
                 <div className="flex items-center justify-center w-full flex-col">
                     <img src={EmptyIcon} alt="" className="w-56 lg:w-1/3"/>
                     <h1 className="text-center lg:text-3xl w-full h-full text-md">Keranjang kamu masih kosong nih...</h1>
+                    <Link to="/kompetisi" className="btn btn-primary mt-5">Lihat Kompetisi</Link>
                 </div>
             </>
         )

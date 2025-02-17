@@ -4,6 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import FormInput from './../components/FormInput';
 import CartTotal from './../components/CartTotal';
 
+const insertSnapScript = () => {
+    return new Promise((resolve) => {
+        const script = document.createElement('script')
+        script.src = 'https://app.sandbox.midtrans.com/snap/snap.js'
+        script.setAttribute("data-client-key", import.meta.env.VITE_MIDTRANS_CLIENT)
+        script.onload = () => {
+            resolve()
+        }
+        document.body.appendChild(script)
+    })
+}
+
+
 const CheckoutPage = () => {
     const user = useSelector(state => state.userState.user);
     const carts = useSelector(state => state.cartState.CartItems);
@@ -16,15 +29,15 @@ const CheckoutPage = () => {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
         
-        console.log("Form Data:", data);
-        console.log("Cart Items:", carts);
+        // console.log("Form Data:", data);
+        // console.log("Cart Items:", carts);
 
         const newArrayCart = carts.map(item => ({
             product: item.productId,
             quantity: item.amount
         }));
 
-        console.log("Processed Cart Items:", newArrayCart);
+        // console.log("Processed Cart Items:", newArrayCart);
     };
 
     return (
