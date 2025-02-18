@@ -6,7 +6,7 @@ import Dialog from './Dialog';
 
 const CardProduct = ({ item, user }) => {
     const [showDialog, setShowDialog] = useState(false);
-    
+
     const handleClick = () => {
         setShowDialog(true); // Menampilkan dialog saat ikon trash diklik
     };
@@ -30,7 +30,7 @@ const CardProduct = ({ item, user }) => {
                 </div>
             </figure>
             <div className="card-body p-3 sm:p-5 flex flex-col">
-                {user && (
+                {user && user.role === "admin" && (
                     <div className="flex justify-end gap-x-2 sm:gap-x-3">
                         <FaTrash onClick={handleClick} className="text-red-500 cursor-pointer text-sm sm:text-base lg:text-xl" />
                         <Link>
@@ -51,7 +51,7 @@ const CardProduct = ({ item, user }) => {
                     </Link>
                 </div>
             </div>
-                {showDialog && <Dialog onClose={handleClose} item={item} />}
+            {showDialog && <Dialog onClose={handleClose} item={item} />}
         </div>
     );
 };
