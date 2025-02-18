@@ -23,7 +23,8 @@ export const loader = async ({ request }) => {
 const LombaPage = () => {
     const { products, pagination, params } = useLoaderData();
     const user = useSelector(state => state.userState.user);
-
+    console.log(user);
+    
     return (
         <>
             {user && user.role === 'admin' && (

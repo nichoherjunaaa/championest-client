@@ -5,6 +5,7 @@ import Loading from './components/Loading';
 // loader
 import { loader as homeLoader } from './pages/HomePage';
 import { loader as lombaLoader } from './pages/LombaPage';
+import { loader as checkoutLoader } from './pages/CheckoutPage'
 
 // action
 import { action as LoginAction } from './pages/LoginPage';
@@ -43,14 +44,14 @@ const router = createBrowserRouter([
             },
             {
                 path: 'kompetisi/new',
-                element: <TambahPage/>
+                element: <TambahPage />
             },
-            
+
             {
                 path: 'cart',
-                element: <CartPage/>
+                element: <CartPage />
             },
-            
+
             {
                 path: 'about',
                 element: <AboutPage />
@@ -64,8 +65,9 @@ const router = createBrowserRouter([
                 element: <DetailPage />
             },
             {
-                path :  'checkout',
-                element : <CheckoutPage/>
+                path: 'checkout',
+                element: <CheckoutPage />,
+                loader: checkoutLoader
             }
         ]
     },

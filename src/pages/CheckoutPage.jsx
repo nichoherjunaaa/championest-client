@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FormInput from './../components/FormInput';
 import CartTotal from './../components/CartTotal';
+import { toast } from 'react-toastify'
+import API from '../api';
 
 const insertSnapScript = () => {
     return new Promise((resolve) => {
@@ -10,17 +12,27 @@ const insertSnapScript = () => {
         script.src = 'https://app.sandbox.midtrans.com/snap/snap.js'
         script.setAttribute("data-client-key", import.meta.env.VITE_MIDTRANS_CLIENT)
         script.onload = () => {
+
             resolve()
         }
         document.body.appendChild(script)
     })
 }
 
+export const loader = (storage) => () => {
+    const user = storage.getState().userState.user
+    if (!user) {
+        toast.warn('Silahkan login terlebih dahulu')
+        return redirect('/login')
+    }
+    return null
+}
+
 
 const CheckoutPage = () => {
     const user = useSelector(state => state.userState.user);
     const carts = useSelector(state => state.cartState.CartItems);
-    
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -28,9 +40,9 @@ const CheckoutPage = () => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
-        
-        // console.log("Form Data:", data);
-        // console.log("Cart Items:", carts);
+
+        console.log("Form Data:", data);
+        console.log("Cart Items:", carts);
 
         const newArrayCart = carts.map(item => ({
             product: item.productId,
@@ -38,7 +50,46 @@ const CheckoutPage = () => {
         }));
 
         // console.log("Processed Cart Items:", newArrayCart);
+        try {
+            const response = await API.post('/order', {
+                email: data.email,
+                firstname: data.firstname,
+                lastname: data.lastname,
+                phone: data.phone,
+                cartItem: newArrayCart
+            })
+
+            const snapToken = response.data.token
+
+            window.snap.pay(snapToken.token, {
+                // Optional
+                onSuccess: function (result) {
+                    console.log(result);
+                    dispatch(clearCartItem())
+                    navigate('/orders')
+                    toast.success('Pesanan Berhasil Diproses')
+                },
+                // Optional
+                onPending: function (result) {
+                    console.log(result);
+                    alert('Pending')
+                },
+                // Optional
+                onError: function (result) {
+                    console.log(result);
+                    alert('Error')
+                }
+            })
+            toast.success('Pesanan Berhasil Diproses')
+        } catch (error) {
+            const errMsg = error?.response?.data?.message;
+            toast.error(errMsg);
+        }
     };
+
+    useEffect(() => {
+        insertSnapScript()
+    })
 
     return (
         <>
