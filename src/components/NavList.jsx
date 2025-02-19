@@ -7,6 +7,7 @@ const links = [
     { id: 2, url: 'kompetisi', text: "Daftar Kompetisi" },
     { id: 3, url: 'about', text: "Tentang Kami" },
     { id: 4, url: 'news', text: "Informasi" },
+    { id: 5, url: 'order', text: "Dipesan" },
 
 ]
 const NavList = () => {
@@ -16,7 +17,7 @@ const NavList = () => {
             <ul className="flex flex-col gap-2 md:flex-row md:gap-2">
                 {links.map((link) => {
                     const { id, url, text } = link
-                    if ((url === 'orders' || url === 'checkout') && !user) {
+                    if (url === 'order'  && !user) {
                         return null
                     }
                     return (

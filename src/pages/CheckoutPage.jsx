@@ -112,7 +112,7 @@ const CheckoutPage = () => {
                         <button className="btn btn-primary lg:hidden" type='submit'>Pesan</button>
                     </form>
                 </div>
-                <div className="lg:col-span-4 lg:pl-4">
+                <div className="lg:col-span-4 lg:pl-4 hidden lg:block">
                     <CartTotal />
                 </div>
             </div>

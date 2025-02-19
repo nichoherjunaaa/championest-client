@@ -29,8 +29,8 @@ const Dialog = ({ onClose, item }) => {
     }, []);
 
     return createPortal(
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[9999]">
-            <div className="bg-white p-5 rounded-lg shadow-lg w-1/4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-5 rounded-lg shadow-lg lg:w-1/4 w-3/4">
                 <h2 className="text-lg font-bold mb-4">Konfirmasi</h2>
                 <p>Apakah Anda yakin ingin menghapus <strong>{item.nama}</strong>?</p>
                 <div className="mt-4 flex justify-end gap-2">
