@@ -19,7 +19,7 @@ const HomePage = () => {
             <div className="body-home flex flex-col gap-7">
                 <div className="text-center py-10 bg-primary text-white">
                     <h1 className="text-4xl font-bold">🔥 Championest 2025 – Tantang Dirimu, Raih Prestasi! 🔥</h1>
-                    <p className="text-lg mt-3 max-w-2xl mx-auto">
+                    <p className="text-lg mt-3 max-w-2xl mx-auto p-6 text-center">
                         Bergabunglah dalam ajang kompetisi terbesar tahun ini! Dapatkan kesempatan memenangkan hadiah menarik dan tunjukkan kemampuan terbaikmu!
                     </p>
                     <Link to="/kompetisi" className="mt-5 inline-block bg-secondary px-6 py-3 text-lg font-semibold rounded-lg hover:bg-accent transition">Lihat Kompetisi</Link>

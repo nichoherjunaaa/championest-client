@@ -99,13 +99,17 @@ const CheckoutPage = () => {
             <div className="mt-8 grid gap-y-8 gap-x-2 lg:grid-cols-12">
                 <div className="lg:col-span-8">
                     <form method="POST" className="bg-base-300 grid gap-y-5 p-5 rounded-2xl" onSubmit={handleCheckout}>
-                        <div className="grid grid-cols-2 gap-x-4">
+                        <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-4 gap-y-5">
                             <FormInput label="First Name" type="text" name="firstname" />
                             <FormInput label="Last Name" type="text" name="lastname" />
                         </div>
                         <FormInput label="Email" type="email" name="email" defaultValue={user?.email || ''} />
                         <FormInput label="Phone" type="tel" name="phone" />
-                        <button type="submit" className="btn btn-primary mt-8">Pesan</button>
+                        <button type="submit" className="btn hidden lg:flex btn-primary mt-8">Pesan</button>
+                        <div className="lg:col-span-4 lg:pl-4 lg:hidden">
+                            <CartTotal />
+                        </div>
+                        <button className="btn btn-primary lg:hidden" type='submit'>Pesan</button>
                     </form>
                 </div>
                 <div className="lg:col-span-4 lg:pl-4">

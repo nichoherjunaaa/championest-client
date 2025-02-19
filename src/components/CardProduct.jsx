@@ -16,7 +16,7 @@ const CardProduct = ({ item, user }) => {
     };
 
     return (
-        <div className="card bg-base-300 w-full sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
+        <div className="card bg-base-300 w-full sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto max-w-xs">
             <figure>
                 <div className="relative w-full aspect-[3/4]">
                     <img
@@ -38,15 +38,15 @@ const CardProduct = ({ item, user }) => {
                         </Link>
                     </div>
                 )}
-                <h2 className="card-title text-sm sm:text-lg lg:text-2xl font-bold">{item.nama}</h2>
-                <p className="font-bold text-primary text-xs sm:text-sm lg:text-xl">{formatHarga(item.harga)}</p>
+                <h2 className="card-title text-lg sm:text-lg lg:text-2xl font-bold">{item.nama}</h2>
+                <p className="font-bold text-primary text-lg sm:text-sm lg:text-xl">{formatHarga(item.harga)}</p>
                 <p className="text-xs sm:text-sm lg:text-lg hidden lg:block">
                     {item.deskripsi.length > 50
                         ? `${item.deskripsi.substring(0, 50)}...`
                         : item.deskripsi}
                 </p>
                 <div className="card-actions justify-start mt-3 sm:mt-5 items-center">
-                    <Link to={`/kompetisi/detail/${item._id}`} className="btn btn-primary btn-sm sm:btn-sm h-9 lg:btn-lg flex justify-center items-center text-center w-full">
+                    <Link to={`/kompetisi/detail/${item._id}`} className="btn btn-primary btn-sm sm:btn-sm h-14 lg:btn-lg flex justify-center items-center text-center w-full">
                         Detail
                     </Link>
                 </div>

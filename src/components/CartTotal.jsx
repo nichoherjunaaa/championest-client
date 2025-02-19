@@ -17,9 +17,13 @@ const CartTotal = () => {
                             </div>
                         ))}
                     </div>
+                    <p className="flex justify-between text-sm pb-2 lg:hidden font-bold">
+                        <span>Total Pembayaran</span>
+                        <span>{formatHarga(cart.cartTotal)}</span>
+                    </p>
                 </div>
             </div>
-            <div className="card bg-base-300">
+            <div className="card hidden lg:bg-base-300 lg:flex">
                 <div className="card-body">
                     <p className="flex justify-between text-sm pb-2 font-bold">
                         <span>Total Pembayaran</span>
